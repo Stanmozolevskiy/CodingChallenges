@@ -44,21 +44,29 @@
 
 class Stack{
     constructor(){
-        let data = [];
+        this.data = [];
     }
+    peak(){
+       return this.data[this.data.length-1];
+    }
+    isEmpty(){
+        if(this.data.length === 0)
+            return true;
 
-    peek(){
-      return this.data[this.data.length -1];
+        return false;
     }
-    push(value){
-        this.data.push(value);
-        return this;
+    push(val){
+        this.data.push(val);
     }
     pop(){
-        this.data.pop();
-        return this;
+        return this.data.pop();
     }
-
+    reverse(){
+        var temp = [];
+        while(!this.isEmpty())
+            temp.push(this.data.pop());
+        this.data = temp;
+    }
 }
   const myStack = new Stack();
 
