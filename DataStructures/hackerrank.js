@@ -25,7 +25,6 @@ function isBalanced(s) {
   }
 
 //https://www.hackerrank.com/challenges/three-month-preparation-kit-waiter/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-nine
-
 function waiter(numbers , q){
     //populate the list of the prime numbers
     const prime = generatePrimes(q);
@@ -56,13 +55,29 @@ function waiter(numbers , q){
     return answers;
 }
 
-function reverese(arr){
-    let temp = [];
-    while(arr.length > 0)
-        temp.push(arr.pop());
-    return temp;
+//https://www.hackerrank.com/challenges/three-month-preparation-kit-stockmax/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-nine
+function stockmax(prices) {
+    let [max, expense,stocks]  = [0,0,0];
+    // Start from the end of the list
+    for(let i = prices.length - 1; i>=0; i--)
+     //finding the max to sell
+      if(max< prices[i]){
+        if(stocks > 0){
+          // sell before next max;
+          expense += stocks * max;
+          stocks = 0;
+        }
+        // set up new max afte selling;
+        max = prices[i];
+      }
+      else {
+        //buy stocks, calc expense;
+        expense -= prices[i];
+        stocks++;
+      }   
+    
+    expense += stocks * max;
+    return expense;
 }
 
-
-
-waiter([3, 4, 7, 6, 5],3)
+stockmax([1,2,3,100,1,2,5,1]);

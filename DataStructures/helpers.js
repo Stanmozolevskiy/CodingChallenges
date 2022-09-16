@@ -25,3 +25,10 @@ function printStack(stack){
         resp.push(stack.pop());
     return resp;
 }
+
+function reverese(arr){
+    let temp = [];
+    while(arr.length > 0)
+        temp.push(arr.pop());
+    return temp;
+}
