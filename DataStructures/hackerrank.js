@@ -80,4 +80,39 @@ function stockmax(prices) {
     return expense;
 }
 
-stockmax([1,2,3,100,1,2,5,1]);
+
+//https://www.hackerrank.com/challenges/three-month-preparation-kit-simple-text-editor/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-nine
+function processData(input) {
+    data = input.split("\n");
+    data.slice(0,1);
+    let original = "";
+    let buffer = [];
+
+    for(let i = 0; i<data.length; i++){
+        let command = data[i];
+        let val = "";
+        if(command.length > 1){
+            let temp = command.split(" ");
+            command = temp[0];
+            val = temp[1];
+        }
+        switch(command){
+             case "3":
+                console.log(original[val-1]);
+                break;
+             case "1":
+                buffer.push(original);
+                original = original + val;
+                break;
+             case "2":
+                buffer.push(original);
+                original = original.slice(0, original.length -val)
+                break;
+             case "4":
+                 //undo
+                 var temp = buffer.pop();
+                 original = temp; 
+                 break;
+         }
+    }
+} 
