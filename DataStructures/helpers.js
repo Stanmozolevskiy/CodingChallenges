@@ -32,3 +32,8 @@ function reverese(arr){
         temp.push(arr.pop());
     return temp;
 }
+
+function getSum(arr){
+    return arr.reduce((p,c)=> p+c);
+}
+  
