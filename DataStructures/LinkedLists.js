@@ -1,11 +1,10 @@
-// add a method reverse() to the linked list that reverses the entire list of nodes
-
 class Node{
   constructor(value){
     this.head = value;
     this.next = null;
   }
 }
+
 class LinkedList{
   constructor(value){
     this.head = new Node(value);
@@ -55,11 +54,11 @@ class LinkedList{
 
   reverse(){
     if(this.length == 1) return this.head;
+    
     let first = this.head;
     let second = first.next;
     this.tail = this.head;
-
-    while(second){
+    while(second != null){
       const temp = second.next;
       second.next = first;
       first = second;
