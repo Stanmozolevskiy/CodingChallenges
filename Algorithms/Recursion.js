@@ -41,11 +41,9 @@ function fibonacciIterative(n){
 console.log(fibonacciIterative(6));
 
 function fibonacciIterativeRecursive(n){
-    if( n === 1 ) return 0;
-    if( n === 2 ) return 1;
+    if( n < 2 ) return n;
     return fibonacciIterativeRecursive(n-1) + fibonacciIterativeRecursive(n-2);
 }
 
 console.log(fibonacciIterativeRecursive(7));
 
-``
