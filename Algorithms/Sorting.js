@@ -36,9 +36,7 @@ function selectSort(arr){
     }
     return arr;
 }
-
 console.log(selectSort(arr));
-
 
 function inssertSort(arr){
     let j, i, key;
@@ -56,6 +54,42 @@ function inssertSort(arr){
     }
     return arr;
 }
+console.log(inssertSort(arr));
+
+
+function mergeSort(array){
+    if(array.length === 1) return array;
+    // Split Array in into right and left
+
+    const half = Math.round(array.length/2);
+    let left = array.slice(0, half);
+    let right = array.slice(half);
+
+    return merge(
+        mergeSort(left),
+        mergeSort(right)
+    );
+}
+
+function merge(left, right){
+    let result = [], 
+    leftIndex = 0,
+    rightIndex = 0;    
+    
+    while(leftIndex < left.length && 
+        rightIndex < right.length){
+            if(left[leftIndex]< right[rightIndex]){
+                result.push(left[leftIndex]);
+                leftIndex++;
+            }
+            else{
+                result.push(right[rightIndex]);
+                rightIndex++;
+            }
+        }
+    return result.concat(left.slice(leftIndex)).concat(right.slice(rightIndex));
+}
 
 let arr = [6,5,3,1,8,7,2,4];
-console.log(inssertSort(arr));
+console.log(mergeSort(arr));
+
