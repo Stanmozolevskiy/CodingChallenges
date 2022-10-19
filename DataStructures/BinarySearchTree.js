@@ -98,7 +98,31 @@ class BinarySearchTree{
             }
           }
         }
+    }
+    breadthFirstSearch(){
+      let current = this.root;
+      let result = [];
+      let queue = [];
+      queue.push(current);
+
+      while(queue.length > 0){
+        current = queue.shift();
+        result.push(current.val);
+        if(cur.left) queue.push(current.left);
+        if(cur.right) queue.push(current.right);
       }
+      return result;
+    }
+    breadthFirstSearchR(queue, result){
+      // base case
+      if(queue.length === 0) return result;
+
+      let cur = queue.shifr();
+      result.push(cur.val);
+      if(cur.left) queue.push(cur.left);
+      if(cur.right) queue.push(cur.right);
+      return this.breadthFirstSearchR(queue, result);
+    }
 
 }
 
@@ -121,23 +145,4 @@ tree.insert(1);
 tree.insert(160);
 
 console.log(JSON.stringify(traverse(tree.root)))
-
-
-// If you know a solution is not far from the root of the tree:
-// Breath First Search/Treversal, because you dont have to go to the bottom of the list and can chech close to root
-
-// If the tree of graph is very deep and solutions are rare:
-// Breath First Search/Treversal, because the deep tree can take a really long time to do the DFS. Also depends if we care of memory consumption
-
-// If the tree is very wide:
-// Depth for search is better because it will use much less memory than BFS.
-
-// If solutions are frequent but located deep in the tree:
-// Depth for search because the solutions are located deep in the tree, so we have to visit the deep
-
-// Determining whether a path exists between two nodes:
-// BFS or DFS depending if we care about momory.
-
-// Finding the shortes path:
-// Breath First Search/Treversal, because you don't have to go deep on each node  
 
