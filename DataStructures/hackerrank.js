@@ -145,20 +145,19 @@ function equalStacks(h1, h2, h3) {
      
     // separate distinct values;
     let uniqueChar = [...new Set(s)];
-    let hash = [];
     let max = 0;
     // convert string to arr
     let sArr = Array.from(s);
      
     for(let i = 0, len = uniqueChar.length; i< len; i++){
         for(let j = i+1; j< len; j++){
-        // getting unique stirngs into separate arrays 
+        // filter pair of elements that are unique from the string
         let temp = sArr.filter(el => {
             return  el === uniqueChar[i] || el === uniqueChar[j]
         }).join('');
 
+        // if elements do not repet check if the max is bigger that alredy existing one
         if(temp.indexOf(uniqueChar[i] + uniqueChar[i]) === -1 && temp.indexOf(uniqueChar[j]+ uniqueChar[j]) === -1)
-            hash.push(temp);
             if( templ.length > max)
                 max = temp.length;
         }
