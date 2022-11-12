@@ -47,3 +47,20 @@ function fibonacciIterativeRecursive(n){
 
 console.log(fibonacciIterativeRecursive(7));
 
+//0,1,1,2,3,5,8,13,21,34
+
+
+function fibonacciMemoized(){
+    let cash = {};
+  return function calculateFibonacci(n){
+        if(n in cash) return cash[n];
+        else{
+            if(n < 2) return n;
+            cash.n = calculateFibonacci(n-1) + calculateFibonacci(n-2);
+            return cash.n;
+        }  
+    }
+}
+
+let test = fibonacciMemoized();
+console.log(test(5));

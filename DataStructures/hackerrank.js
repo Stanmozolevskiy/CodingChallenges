@@ -139,3 +139,31 @@ function equalStacks(h1, h2, h3) {
     // return any of the sums
     return stacks[0].sum;
  }
+
+ //https://www.hackerrank.com/challenges/three-month-preparation-kit-two-characters/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-nine
+ function alternate(s){
+     
+    // separate distinct values;
+    let uniqueChar = [...new Set(s)];
+    let hash = [];
+    let max = 0;
+    // convert string to arr
+    let sArr = Array.from(s);
+     
+    for(let i = 0, len = uniqueChar.length; i< len; i++){
+        for(let j = i+1; j< len; j++){
+        // getting unique stirngs into separate arrays 
+        let temp = sArr.filter(el => {
+            return  el === uniqueChar[i] || el === uniqueChar[j]
+        }).join('');
+
+        if(temp.indexOf(uniqueChar[i] + uniqueChar[i]) === -1 && temp.indexOf(uniqueChar[j]+ uniqueChar[j]) === -1)
+            hash.push(temp);
+            if( templ.length > max)
+                max = temp.length;
+        }
+    }
+    return  max;
+ }
+
+ console.log(alternate("abasadbae"));
