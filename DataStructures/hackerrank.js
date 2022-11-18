@@ -141,8 +141,7 @@ function equalStacks(h1, h2, h3) {
  }
 
  //https://www.hackerrank.com/challenges/three-month-preparation-kit-two-characters/problem?isFullScreen=true&h_l=interview&playlist_slugs%5B%5D=preparation-kits&playlist_slugs%5B%5D=three-month-preparation-kit&playlist_slugs%5B%5D=three-month-week-nine
- function alternate(s){
-     
+ function alternate(s){ 
     // separate distinct values;
     let uniqueChar = [...new Set(s)];
     let max = 0;
@@ -158,7 +157,7 @@ function equalStacks(h1, h2, h3) {
 
         // if elements do not repet check if the max is bigger that alredy existing one
         if(temp.indexOf(uniqueChar[i] + uniqueChar[i]) === -1 && temp.indexOf(uniqueChar[j]+ uniqueChar[j]) === -1)
-            if( templ.length > max)
+            if( temp.length > max)
                 max = temp.length;
         }
     }
@@ -166,3 +165,20 @@ function equalStacks(h1, h2, h3) {
  }
 
  console.log(alternate("abasadbae"));
+
+ function maxSubarray(arr) {
+    let [maxSub,curSum,max, sum] = [arr[0],arr[0],arr[0], arr[0]];
+
+    for(let i = 1; i< arr.length; i++){
+        if(curSum < 0)
+            curSum = 0;  
+
+        sum += arr[i]> 0 ? arr[i] : 0;
+        max = Math.max(max, arr[i]);
+        curSum += arr[i];
+        maxSub = Math.max(maxSub, curSum);
+    }
+    return [maxSub, sum> 0 ? sum : max];
+ }
+
+ console.log(maxSubarray([1, -1, -1, -1, -1, 5]))
