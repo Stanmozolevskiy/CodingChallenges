@@ -182,3 +182,34 @@ function equalStacks(h1, h2, h3) {
  }
 
  console.log(maxSubarray([1, -1, -1, -1, -1, 5]))
+
+
+
+function chiefHopper(arr) {
+// 1. botEnergy < height :
+//     newEnergy = botEnergy - (height - botEnergy);
+//  Simplify the formula:
+//     newEnergy = (botEnergy - height + botEnergy);
+//     newEnergy = 2 * botEnergy - height;
+//     botEnergy = (newEnergy + height)/2;
+
+// 2. botEnergy > height :
+//     newEnergy = botEnergy + (botEnergy - height);
+//     newEnergy = 2 * botEenrgy - height;
+//     botEnergy = (newEnergy + height) / 2;
+
+// 3. botEnergy == height :
+//     newEnergy = botEnergy;
+
+// the same formula for three cases: botEnergy = (newEnergy + height) / 2;
+    let minEnergy = 0;
+    
+    for(let i = arr.length -1; i >= 0; i--){
+        // we will always need to round up to make sure we have enough energy, that is why we use Math.ceil
+        minEnergy = Math.ceil((minEnergy + arr[i])/2);
+    }
+return minEnergy;
+
+}
+
+console.log(chiefHopper([[3,4,3,2,4]]));
