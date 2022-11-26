@@ -213,3 +213,26 @@ return minEnergy;
 }
 
 console.log(chiefHopper([[3,4,3,2,4]]));
+
+
+function weightedUniformStrings(s, queries) {
+    
+    const d = {};
+    // separate all of the matching letters 
+    const matches = s.match(/([a-z])\1*/g);
+
+    matches.forEach(
+        // create new arr lengh of string "match"
+        v => Array(v.length)
+            // fill new arr with the value for letter
+            .fill(v.charCodeAt(0) - 96)
+            // add all of the values for consiquent letters
+            .map((v,i)=> v * (i+1))
+            // add the values to the d 
+            .forEach(v => d[v] = true));
+
+    // if d exist return yes if no return no
+    return queries.map(v=> d[v] == true ? "Yes": "No")    
+}
+
+console.log(weightedUniformStrings("aaabccb", [1,2,3]))
