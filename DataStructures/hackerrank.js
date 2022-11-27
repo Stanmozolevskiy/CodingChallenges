@@ -236,3 +236,115 @@ function weightedUniformStrings(s, queries) {
 }
 
 console.log(weightedUniformStrings("aaabccb", [1,2,3]))
+
+
+function sortedSquares (nums) {
+    if(nums.length < 2) return [Math.pow(nums[0],2)];
+    let i = 0; 
+    let j = nums.length -1
+    let ans = [];
+    while(i<j){
+        let first = Math.pow(nums[i],2);
+        let second = Math.pow(nums[j],2);
+        if(first > second){
+            ans.push(first)
+            i++;
+            if(i>=j) ans.push(second);
+        }
+        else{
+            ans.push(second);
+            j--;
+            if(i>=j) ans.push(first);
+        } 
+        
+    }
+    
+    i = 0;
+    j = ans.length -1;
+    
+    while(i<j){
+        let temp = ans[i];
+        ans[i]= ans[j];
+        ans[j] = temp;
+        i++;
+        j--;
+    }
+    return ans;
+};
+
+console.log(sortedSquares([-100]));
+
+function slidingWindowFindLength(nums, k) {
+    let left = 0, curr = 0, ans = 0;
+    for (let right = 0; right < nums.length; right++) {
+        debugger;
+        curr += nums[right];
+        while (curr > k) {
+            debugger;
+            curr -= nums[left];
+            left++;
+        }
+        
+        ans = Math.max(ans, right - left + 1);
+    }
+    
+    return ans;
+}
+
+console.log(slidingWindowFindLength([3, 1, 2, 7, 4, 2, 1, 1, 5], 8));
+
+
+function slidingWindonBiggestSubaray(s){
+    let left = 0, count = 0; ans = 0;
+
+    for(let right = 0; right < s.length; right++){
+        if(s[right] === "0")
+            count ++;
+
+        while(count > 1 ){
+            if(s[left] === "0")
+                count --;
+
+            left++;
+        }
+        ans = Math.max(ans, right - left +1);
+    }
+    return ans;
+}
+
+console.log(slidingWindonBiggestSubaray("1101100111"));
+
+function slidingWindowNumberOfSubArrays(arr, k){
+    let left = 0, ans = 0;
+    let cur = 1;
+
+    for(let right = 0; right < arr.length; right++){
+        cur *= arr[right];
+
+        while(left <= right && cur >= k){
+            cur /= arr[left];
+            left++;
+        }
+        ans += right - left +1;
+    }
+    return ans;
+}
+
+console.log(slidingWindowNumberOfSubArrays([10, 5, 2, 6],100));
+
+function slidingWindowFixedSizeArrSum(arr,k){
+    let left = 0, sum = 0, ans=0;
+
+    for(let right = 0; right< arr.length; right++){
+        sum += arr[right];
+
+        while(right - left +1 > k){
+            sum -= arr[left];
+            left ++;
+        }
+        ans = Math.max(ans, sum);
+    }
+    return ans;
+}
+
+console.log(slidingWindowFixedSizeArrSum([3,-1,4,12,-8,5,6],4));
