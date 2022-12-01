@@ -146,3 +146,42 @@ function prefixSum(nums, queries, limit){
 
 console.log(prefixSum([1, 6, 3, 2, 7, 2], [[0, 3], [2, 5], [2, 4]], 13));
 
+function countElements (arr) {
+    let hash = new Map();
+    let ans = 0;
+
+    arr.forEach(num => {
+        if(!hash.has(num+1))
+            hash.set(num+1, 1);
+        else
+            hash.set(num+1, hash.get(num+1) +1)});
+
+
+    for(let i = 0; i< arr.length; i++){
+       debugger;
+            if(hash.has(arr[i])){
+               ans += hash.get(arr[i]);
+               hash.delete(arr[i])
+            }
+   }
+   return ans;
+};
+
+console.log(countElements([1,1,2,2]))
+
+function subarraySumWithHashing(nums, k){
+    let counts = new Map();
+    counts.set(0, 1);
+    let ans = 0, curr = 0;
+
+    for (const num of nums) {
+        debugger;
+        curr += num;
+        ans += counts.get(curr - k) || 0;
+        counts.set(curr, (counts.get(curr) || 0) + 1);
+    }
+
+    return ans;
+}
+
+console.log(subarraySumWithHashing([1, 2, 5, 2, 1],3))
