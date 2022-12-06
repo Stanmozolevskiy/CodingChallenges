@@ -165,7 +165,7 @@ function countElements (arr) {
             }
    }
    return ans;
-};
+}
 
 console.log(countElements([1,1,2,2]))
 
@@ -185,3 +185,114 @@ function subarraySumWithHashing(nums, k){
 }
 
 console.log(subarraySumWithHashing([1, 2, 5, 2, 1],3))
+
+function findWinners(matches){
+    let loosers = new Map();
+    matches.forEach(result=>{
+        let winner = result[0];
+        let looser = result[1];
+        // add player to the hash and set the score;
+        loosers.set(winner, (loosers.get(winner)|| 0 ));
+        loosers.set(looser, (loosers.get(looser)|| 0 ) + 1);
+    })
+
+    let ans = [[], []];
+    loosers.forEach((val, key) =>
+        val === 0 ? ans[0].push(key): val === 1 ? ans[1].push(key): null);
+
+    ans[0].sort((a,b)=> a-b);
+    ans[1].sort((a,b)=> a-b);
+
+    return ans;
+}
+
+console.log(findWinners([[1,3],[2,3],[3,6],[5,6],[5,7],[4,5],[4,8],[4,9],[10,4],[10,9]]))
+
+
+function largestUniqueNumber(nums) {
+    let max = new Map();
+    nums.forEach(x=>max.set(x, (max.get(x) || 0) +1 ));
+   
+    let ans = -1;
+    max.forEach((val, key)=>{
+debugger
+        val === 1 && key > ans ? ans = key : null ;
+    } )
+    
+    
+    return ans;
+};
+
+console.log(largestUniqueNumber([1,2,5,5,10]));
+
+
+
+function maxNumberOfBalloons (text) {
+    let hash = new Map();
+    for(let i = 0; i< text.length; i++){
+        let char = text[i];
+        if("balloon".includes(char))
+            hash.set(char, (hash.get(char) || 0) +1);
+    }
+    
+    let ans = 0;
+    while(true)
+        for(let char of "balloon"){
+            debugger;
+            if(hash.get(char) === 0 || !hash.has(char))
+                return  ans;
+            else{
+                hash.set(char, hash.get(char)-1);
+                if(char === "n")
+                    ans++;
+            }
+        }
+};
+
+console.log(maxNumberOfBalloons("lloo"));
+
+
+function trackFrequencyWithHash(s){
+    let left = 0, ans =0;
+    let hash = new Map();
+
+    for(let right = 0; right<s.length; right++){
+        let letter = s[right];
+        hash.set(letter, (hash.get(letter)||0) +1);
+
+        while(hash.get(letter) > 1){
+            debugger;
+            let leftLetter = s[left];
+            hash.set(leftLetter, (hash.get(leftLetter) - 1) );
+            left++;
+        }
+        ans = Math.max(ans, right + 1 - left);
+    }
+    return ans;
+}
+
+console.log(trackFrequencyWithHash("abcadbcbb"));
+
+function deleteDuplicates(head) {
+    if( head === null) return null;
+  
+    // create a dummy node to store the pointer;
+    let dummy = new ListNode(-Infinity, head);
+    let cur = head;
+    let prev = dummy;
+    
+    while(cur){
+        if(cur.val === prev.val){
+            // while the values are repeating move forward
+            while(cur && cur.val === prev.val)
+                cur = cur.next;
+            // when not repeating set prev to cur
+            prev.next = cur;  
+        }else{
+            prev = cur;
+            cur = cur.next;
+        }
+    }
+    
+    return dummy.next;
+};
