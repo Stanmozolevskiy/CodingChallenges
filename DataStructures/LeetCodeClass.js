@@ -296,3 +296,44 @@ function deleteDuplicates(head) {
     
     return dummy.next;
 };
+
+function pairSum(head) {
+    // split the linked list into two, then reversed the second half.
+    let slow = head;
+    let fast = head.next;
+    while(fast && fast.next){
+        slow = slow.next;
+        fast = fast.next.next;
+    }
+
+    let newList = slow.next;
+    slow.next = null;
+    let newHead = reverse(newList);
+
+    //iterated through both lists finding the highest sum.
+    let p1 = head;
+    let p2 = newList;
+
+    let max = -Infinity;
+    
+    while(p1 && p2){
+        let sum = p1.val + p2.val;
+        max = Math.max(max, sum);
+
+        p1 = p1.next;
+        p2 = p2.next;
+    }
+
+  return max;
+};
+
+const reverse = (head) => {
+    let prev = null, node = head;
+    while(node){
+        let temp = node.next;
+        node.next = prev;
+        prev = node;
+        node = temp;
+    }
+    return prev;
+}
