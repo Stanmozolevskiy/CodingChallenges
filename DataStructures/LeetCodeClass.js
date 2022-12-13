@@ -337,3 +337,49 @@ const reverse = (head) => {
     }
     return prev;
 }
+
+
+var reverseBetween = function(head, left, right) {
+    if(left === right) return head;
+
+  
+    // leftHead and rightEnd is start and end of a list that neeeds to be reversed
+    // leftHeadPrev is previous of starting position and rightEndNext is next of end of list to be reversed.
+    let leftHead = null;
+    let leftHeadPrev = null;
+    let rightEnd = null;
+    let rightEndNext = null;
+
+    // Find values of above pointers.
+    let i = 1
+    let curr = head
+
+    while(curr && i<=right){
+        if(i < left)
+            leftHeadPrev = curr;
+        if(i === left)
+            leftHead = curr;
+        if(i === right){
+            rightEnd = curr;
+            rightEndNext = curr.next;
+        }
+        curr = curr.next;
+        i++;
+    }
+    rightEnd.next = null;
+
+    // Reverse linked list starting with leftHead and asign it to rightEnd
+    rightEnd = reverse(leftHead);
+
+    // If the starting position was not head
+    if(leftHeadPrev)
+        leftHeadPrev.next = rightEnd;
+    // If start was head
+    else head = rightEnd
+
+    leftHead.next = rightEndNext;
+
+    return head;
+   
+};
+
