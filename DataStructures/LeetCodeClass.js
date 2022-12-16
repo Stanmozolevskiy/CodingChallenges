@@ -383,3 +383,19 @@ var reverseBetween = function(head, left, right) {
    
 };
 
+
+var makeGood = function(s) {
+    let stack = [];
+   
+    for(let i = 0; i< s.length; i++){
+        let peak = stack[stack.length -1];
+        let curr = s[i];
+        if(peak != curr && (peak === curr.toUpperCase() || peak === curr.toLowerCase()))
+           stack.pop();
+        else
+           stack.push(s[i]);
+    }
+    
+    return stack.join("");
+};
+
